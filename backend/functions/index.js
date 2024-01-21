@@ -1,19 +1,45 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+var admin = require('firebase-admin');
+const { FieldValue } = require('firebase-admin/firestore');
+const functions = require('firebase-functions');
+const express = require('express');
+const cors = require('cors');
+const { GetProducts, GetPicklist } = require('./neto');
 
-const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
+var adpp = admin.initializeApp();
+const app = express();
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+app.use(cors({origin: true}));
 
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+app.get('/test', async (req, res) => {
+	const data = "HelloWorld"
+	res.send({data})
+});
+
+app.post('/get-products', async (req, res) => {
+	const skus = await req.body.skus;
+
+	const resData = await GetProducts(skus);
+	
+	if (resData !== null) {
+		res.send(resData);
+	} else {
+		res.statusCode(500).send("Can't Find Products: " + skus);
+	}
+});
+
+app.post('/get-picklist', async (req, res) => {
+	const skus = await req.body.skus;
+
+	const resData = await GetPicklist(["TSV2A"]);
+	
+	if (resData !== null) {
+		res.send(resData);
+	} else {
+		res.status(500).send({message: "FAILED to Get picklist"});
+	}
+});
+
+
+
+
+exports.api = functions.https.onRequest(app);
