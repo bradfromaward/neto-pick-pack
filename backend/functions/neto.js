@@ -1,6 +1,6 @@
 
 
-const OutputSelector = ["ID", "Name", "RRP", "Images", "CostPrice", "Subtitle", "KitComponents", "PickZone"]
+const OutputSelector = ["ID", "Name", "RRP", "Images", "CostPrice", "Subtitle", "KitComponents", "PickZone", "ShippingCategory"]
 
 const GetProduct = async (sku) => {
     let ProductArray = await GetProducts([sku]);
@@ -60,7 +60,7 @@ const GetPicklist = async (skus) => {
 			body: JSON.stringify({
 				Filter: {
 					OrderStatus: "Pick",
-					OutputSelector: ["Email", "SalesChannel", "OrderLine", "OrderLine.BinLoc"]
+					OutputSelector: ["Email", "SalesChannel", "OrderLine", "OrderLine.ShippingTracking"]
 				},
 			})
 		});

@@ -47,22 +47,22 @@ const SelectPicklist = () => {
                         // Process only KitComponent SKUs
                         ProductData.KitComponents.forEach(component => {
                             const kitSKU = component.KitComponent.ComponentSKU;
-                            const kitQuantity = component.KitComponent.AssembleQuantity * Quantity; // We have to multiply but orderline qty to get correct numver
-                            const kitSourcePickZone = component.KitComponent.SourceProduct.PickZone;
+                            const kitQuantity = parseInt(component.KitComponent.AssembleQuantity) * parseInt(Quantity); // We have to multiply but orderline qty to get correct numver
+                            const kitSource = component.KitComponent.SourceProduct;
             
                             if (acc[kitSKU]) {
                                 acc[kitSKU].Quantity += kitQuantity;
                             } else {
-                                acc[kitSKU] = { SKU: kitSKU, Quantity: kitQuantity, PickZone: kitSourcePickZone};
+                                acc[kitSKU] = { SKU: kitSKU, Quantity: kitQuantity, Product: kitSource};
                             }
                         });
                     } else {
                         // If no KitComponents, process the main order line SKU
                         const { SKU } = line;
                         if (acc[SKU]) {
-                            acc[SKU].Quantity += Quantity;
+                            acc[SKU].Quantity += parseInt(Quantity);
                         } else {
-                            acc[SKU] = { SKU, Quantity, PickZone: ProductData.PickZone };
+                            acc[SKU] = { SKU, Quantity: parseInt(Quantity), Product: ProductData };
                         }
                     }
                 }
@@ -70,8 +70,22 @@ const SelectPicklist = () => {
             return acc;
         }, {});
         
+        //Now Order Them via PickZone!
+
+        const orderLines = Object.values(combinedOrderLines);
+
+        orderLines.sort((a, b) => {
+            if (a.Product.PickZone < b.Product.PickZone) {
+                return -1;
+            }
+            if (a.Product.PickZone > b.Product.PickZone) {
+                return 1;
+            }
+            return 0;
+        })
+
         // Convert the object back to an array
-        return Object.values(combinedOrderLines);
+        return orderLines;
     }
   
     return (
