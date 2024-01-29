@@ -2,6 +2,19 @@ import React, { useEffect, useState } from 'react';
 import "./index.scss";
 
 const Orderline = ({ orderline }) => {
+    const [scanQTY, SetScanQTY] = useState(0);
+
+    useEffect(() => {
+        if(orderline.Scans) {
+            let scans = 0;
+
+            orderline.Scans.forEach(scan => {
+                scans += scan.quantity;
+            });
+
+            SetScanQTY(scans);
+        }
+    }, [orderline.Scans])
   
     return (
         <div key={orderline.SKU} className='orderline-container'>
@@ -13,7 +26,7 @@ const Orderline = ({ orderline }) => {
                 <p>{orderline.Product.ShippingCategory}</p>
             </div>
             <div>
-                <p id="orderline-qty">0/{orderline.Quantity}</p>
+                <p id="orderline-qty">{scanQTY}/{orderline.Quantity}</p>
             </div>
         </div> 
     );
