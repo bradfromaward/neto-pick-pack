@@ -1,0 +1,31 @@
+.modal {
+    position: fixed;
+    bottom: 0;
+    border: 1px solid lightgray;
+    top: 0%;
+    right: 0;
+    left: 0;
+    background-color: white;
+    padding: 1rem;
+    overflow: scroll;
+    opacity: 0;
+    pointer-events: none;
+    transition: all ease-out 150ms;
+
+    &.visible{
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    textarea {
+        width: 100%;
+        box-sizing: border-box;
+        height: 120px;
+    }
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 0.5rem;
+}

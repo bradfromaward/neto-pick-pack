@@ -1,0 +1,56 @@
+@import '../../variables.scss';
+
+.orderline-container{
+    width: 100%;
+    border-bottom: 1px solid rgb(196, 196, 196);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+
+    &.picked {
+        opacity: 0.3;
+    }
+
+    .picked-status{
+        width: fit-content;
+        padding: 0.5rem;
+        font-weight: 700;
+        border-radius: 4rem;
+        color: white;
+        background: $green;
+    }
+
+    #orderline-qty{
+        font-size: 3rem;
+        font-weight: 700;
+        margin: 0;
+        text-align: right;
+        text-align: right;
+    }
+
+    #orderline-qty-picked{
+        font-size: 1.2rem;
+        font-weight: 400;
+        width: 100%;
+        margin: 0;
+        text-align: right;
+    }
+
+
+    h4 {
+        font-size: 1.8rem;
+        margin: 0;
+    }
+
+    h3{
+        font-size: 1.1rem;
+        font-weight: 400px;
+    }
+
+    .shipping{
+        padding: 0.5rem 1rem;
+        width: max-content;
+        border-radius: 4rem;
+    }
+}

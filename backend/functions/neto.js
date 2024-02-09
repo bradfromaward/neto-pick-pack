@@ -1,6 +1,6 @@
 
 
-const OutputSelector = ["ID", "Name", "RRP", "Images", "CostPrice", "Subtitle", "KitComponents", "PickZone", "ShippingCategory"]
+const OutputSelector = ["ID", "Name", "RRP", "Images", "CostPrice", "Subtitle", "KitComponents", "PickZone", "ShippingCategory", "AccountingCode"]
 
 const GetProduct = async (sku) => {
     let ProductArray = await GetProducts([sku]);

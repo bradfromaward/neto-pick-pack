@@ -5,7 +5,8 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const App = () => {
-  const [pickrun, SetPickrun] = useState("")
+  const [pickrun, SetPickrun] = useState("");
+  const [currentUser, SetUser] = useState("");
 
  // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -26,10 +27,14 @@ const db = getFirestore(app);
 
 // Initialize Firebase
 
+  const onSelectUser = (user) => {
+    SetUser(user);
+  }
+
   return (
     <div>
-      {!pickrun && <SelectPickrun db={db} onSelectPickList={(p) => SetPickrun(p)}/>}
-      {pickrun && <Pickrun db={db} pickrun={pickrun} onClose={() => SetPickrun("")}/>}
+      {!pickrun && <SelectPickrun db={db} onSelectPickList={(p) => SetPickrun(p)} onSelectUser={user => onSelectUser(user)} user={currentUser}/>}
+      {pickrun && <Pickrun db={db} pickrun={pickrun} onClose={() => SetPickrun("")} user={currentUser}/>}
     </div>  
   );
 }

@@ -1,0 +1,49 @@
+@import '../../variables.scss';
+
+.container {
+    padding: 1rem;
+}
+
+button {
+    border: 0;
+    background: $grayG;
+    border-radius: 1rem;
+    font-size: 1.1rem;
+    padding: 1rem;
+    margin: 0.25rem 0;
+    box-shadow: 0px 10px 5px -12px rgba(0,0,0,0.45);
+
+    &.wide {
+        width: 100%;
+    }
+
+    &.large {
+        padding: 1.5rem;
+        font-size: 1.2rem;
+    }
+}
+
+.red {
+    background: $redG;
+    color: white;
+}
+
+.green {
+    color: white;
+    background: $greenG;
+}
+
+.gray {
+    color: black;
+    background: $grayG;
+}
+
+.blue {
+    color: white;
+    background: $blueG;
+}
+.vertical-list {
+    display: grid;
+    row-gap: 0.2rem;
+    flex-direction: column;
+}

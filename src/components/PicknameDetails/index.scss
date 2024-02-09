@@ -1,0 +1,61 @@
+@import '../../variables.scss';
+
+.modal {
+    position: fixed;
+    bottom: 0;
+    border: 1px solid lightgray;
+    top: 0%;
+    right: 0;
+    left: 0;
+    background-color: white;
+    padding: 1rem;
+    overflow: scroll;
+    opacity: 0;
+    pointer-events: none;
+    transition: all ease-out 150ms;
+    z-index: 10;
+
+    &.error {
+        background: $redG;
+        color: white;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &.visible{
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    textarea {
+        width: 100%;
+        box-sizing: border-box;
+        height: 120px;
+    }
+
+    #scans {
+        font-size: 4rem;
+        margin: 0;
+        color: rgb(83, 83, 83);
+    }
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 0.5rem;
+}
+
+.scan-container {
+    background-color: rgb(235, 235, 235);
+    padding: 0.2rem 1rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+
+    #qty {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+}
